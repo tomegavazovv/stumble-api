@@ -12,7 +12,7 @@ public class UserToNearbyUser implements Converter<User, NearbyUserDTO> {
     public NearbyUserDTO convert(User user) {
         NearbyUserDTO userDTO = new NearbyUserDTO();
         userDTO.setFirstName(user.getFirstName());
-        userDTO.setId(user.getID());
+        userDTO.setId(user.getId());
         userDTO.setLastName(user.getLastName());
         userDTO.setLat(user.getLat());
         userDTO.setLon(user.getLon());

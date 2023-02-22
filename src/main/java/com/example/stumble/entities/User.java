@@ -2,17 +2,18 @@ package com.example.stumble.entities;
 
 import com.example.stumble.enums.Gender;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 public class User {
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
 
     @NotNull
     private String firstName;
@@ -45,14 +46,6 @@ public class User {
             joinColumns={@JoinColumn(name="user_id")},
             inverseJoinColumns={@JoinColumn(name="blocked_user_id")})
     private Set<User> blockedUsers = new HashSet<>();
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -148,5 +141,13 @@ public class User {
 
     public void setBlockedUsers(Set<User> blockedUsers) {
         this.blockedUsers = blockedUsers;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
