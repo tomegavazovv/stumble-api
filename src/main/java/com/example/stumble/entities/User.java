@@ -4,6 +4,7 @@ import com.example.stumble.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,29 +19,33 @@ public class User {
 
     @NotNull
     private String firstName;
-    @NotNull
 
+    @NotNull
     private String lastName;
 
-    private String email;
+    @NotNull
+    private String image;
 
-    private String description;
+    @NotNull
+    private Double lat;
+
+    @NotNull
+    private Double lon;
 
     @Enumerated(EnumType.STRING)
     @NotNull
     private Gender gender;
+
+    @Email
+    private String email;
+
+    private String description;
 
     private String instagramAccount;
 
     private String facebookAccount;
 
     private String linkedinAccount;
-
-    private String image;
-
-    private Double lat;
-
-    private Double lon;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="blocked_users",

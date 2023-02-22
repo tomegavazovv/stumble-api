@@ -6,7 +6,7 @@ import com.example.stumble.exceptions.UserNotFoundException;
 import java.util.List;
 
 public interface UserService {
-    List<User> getNearbyUsers(Long id, Double lat, Double lon);
+    List<User> findNearbyUsers(Long id, Double lat, Double lon);
     void blockUser(Long userId, Long blockUserId) throws UserNotFoundException;
-    User getUserDetails(Long id) throws UserNotFoundException;
+    User findUserDetails(Long id) throws UserNotFoundException;
 }

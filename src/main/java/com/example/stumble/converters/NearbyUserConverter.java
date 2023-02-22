@@ -7,7 +7,7 @@ import org.springframework.core.convert.converter.Converter;
 
 
 @Component
-public class UserToNearbyUser implements Converter<User, NearbyUserDTO> {
+public class NearbyUserConverter implements Converter<User, NearbyUserDTO> {
     @Override
     public NearbyUserDTO convert(User user) {
         NearbyUserDTO userDTO = new NearbyUserDTO();

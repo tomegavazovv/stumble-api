@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> getNearbyUsers(Long id, Double lat, Double lon) {
+    public List<User> findNearbyUsers(Long id, Double lat, Double lon) {
         return userRepository.findNearbyUsers(id, lat, lon);
     }
 
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserDetails(Long id) {
+    public User findUserDetails(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }
