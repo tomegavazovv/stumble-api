@@ -8,10 +8,12 @@ import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 import com.example.stumble.services.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -32,8 +34,8 @@ public class UserController {
             @PathVariable Long id, @PathVariable Double lat, @PathVariable Double lon){
 
         List<NearbyUserDTO> users = userService.getNearbyUsers(id, lat, lon).stream()
-                .map(nearbyUserConverter::convert).toList();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+                .map(nearbyUserConverter::convert).collect(Collectors.toList());
+        return new ResponseEntity<>(users, HttpStatus.CREATED);
     }
 
     @PostMapping("/block")
