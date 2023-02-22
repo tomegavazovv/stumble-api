@@ -1,7 +1,6 @@
 package com.example.stumble.DTO;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 public class NearbyUserDTO {
     private Long id;

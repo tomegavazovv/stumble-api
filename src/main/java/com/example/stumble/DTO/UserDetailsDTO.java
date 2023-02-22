@@ -1,7 +1,6 @@
 package com.example.stumble.DTO;
 
 import com.example.stumble.enums.Gender;
-import lombok.Data;
 
 public class UserDetailsDTO {
     private String firstName;
