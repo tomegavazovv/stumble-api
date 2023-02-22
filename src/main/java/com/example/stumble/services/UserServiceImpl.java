@@ -34,10 +34,4 @@ public class UserServiceImpl implements UserService{
                 .orElseThrow(UserNotFoundException::new);
     }
 
-    @Override
-    public void k(){
-        User user = userRepository.findById(1L).get();
-        user.setImage("image1.jpeg");
-        userRepository.save(user);
-    }
 }
