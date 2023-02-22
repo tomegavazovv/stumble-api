@@ -3,7 +3,6 @@ package com.example.stumble.entities;
 import com.example.stumble.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -11,8 +10,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "users")
 public class User {
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
