@@ -13,8 +13,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "WITH Distance AS (" +
             "  SELECT *, acos(sin(radians(:Lat)) * sin(radians(lat)) + cos(radians(:Lat)) * cos(radians(lat)) * cos(radians(:Lon) - radians(lon))) * 6371 AS Distance" +
-            "  FROM users" +
-            ")" +
+            "  FROM users )" +
             "SELECT * " +
             "FROM Distance " +
             "LEFT JOIN blocked_users bu ON Distance.ID = bu.blocked_user_id AND bu.user_id = :id " +

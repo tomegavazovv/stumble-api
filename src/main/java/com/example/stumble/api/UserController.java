@@ -43,7 +43,7 @@ public class UserController {
         userService.blockUser(userId, blockUserId);
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDetailsDTO> getDetails(@PathVariable Long id){
         try{
             User user = userService.getUserDetails(id);
