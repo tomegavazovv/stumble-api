@@ -1,5 +1,5 @@
 INSERT INTO users (id, first_name, last_name, email, description, gender, instagram_account, facebook_account, linkedin_account, image, lat, lon)
-VALUES (1, 'John', 'Doe', 'johndoe@gmail.com', 'Software Engineer', 'MALE', 'johndoe_insta', 'johndoe_fb', 'johndoe_linkedin', 'photo1.jpeg', 37.7749, -122.4194);
+VALUES (10, 'John', 'Doe', 'johndoe@gmail.com', 'Software Engineer', 'MALE', 'johndoe_insta', 'johndoe_fb', 'johndoe_linkedin', 'photo1.jpeg', 37.7749, -122.4194);
 
 INSERT INTO users (id, first_name, last_name, email, description, gender, instagram_account, facebook_account, linkedin_account, image, lat, lon)
 VALUES (2, 'Jane', 'Doe', 'janedoe@gmail.com', 'Doctor', 'FEMALE', 'janedoe_insta', 'janedoe_fb', 'janedoe_linkedin', 'photo2.jpeg', 37.7749, -122.4194);
