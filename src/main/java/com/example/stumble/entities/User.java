@@ -2,7 +2,8 @@ package com.example.stumble.entities;
 
 import com.example.stumble.enums.Gender;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
