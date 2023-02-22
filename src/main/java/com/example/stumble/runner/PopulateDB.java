@@ -15,20 +15,8 @@ public class PopulateDB implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User();
-        user.setId(1L);
-        user.setFirstName("Tome");
-        user.setLastName("Gavazov");
-        user.setEmail("tomegavazov@gmail.com");
-        user.setFacebookAccount("facebook_acc");
-        user.setInstagramAccount("instagram_acc");
-        user.setLinkedinAccount("linkedin_acc");
-        user.setDescription("description");
-        user.setImage("/photo1.jpeg");
-        user.setGender(Gender.MALE);
-        user.setLat(10.0);
-        user.setLon(10.0);
+        userRepository.delete(userRepository.findById(1L).get());
 
-        userRepository.save(user);
+
     }
 }
