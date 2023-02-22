@@ -29,6 +29,12 @@ public class UserController {
         this.userDetailsConverter = userDetailsConverter;
     }
 
+    @GetMapping
+    public String home(){
+        userService.k();
+        return "gotovo";
+    }
+
     @GetMapping("/nearby/{id}/{lat}/{lon}")
     public ResponseEntity<List<NearbyUserDTO>> getNearbyUsers(
             @PathVariable Long id, @PathVariable Double lat, @PathVariable Double lon) {

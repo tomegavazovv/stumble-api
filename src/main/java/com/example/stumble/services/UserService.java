@@ -9,4 +9,6 @@ public interface UserService {
     List<User> getNearbyUsers(Long id, Double lat, Double lon);
     void blockUser(Long userId, Long blockUserId) throws UserNotFoundException;
     User getUserDetails(Long id) throws UserNotFoundException;
+
+    void k();
 }
