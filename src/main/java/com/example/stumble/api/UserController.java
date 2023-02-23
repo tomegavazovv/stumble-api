@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @PostMapping("/block")
-    public void blockUser(Long userId, Long blockUserId){
-        userService.blockUser(userId, blockUserId);
+    public ResponseEntity<UserDetailsDTO> blockUser(Long userId, Long blockUserId){
+        return new ResponseEntity<>(userService.blockUser(userId, blockUserId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

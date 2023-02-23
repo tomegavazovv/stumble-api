@@ -1,5 +1,7 @@
 package com.example.stumble.services;
 
+import com.example.stumble.DTO.UserDetailsDTO;
+import com.example.stumble.converters.UserDetailsConverter;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 import com.example.stumble.repositories.UserRepository;
@@ -21,11 +23,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void blockUser(Long userId, Long blockUserId) throws UserNotFoundException {
+    public UserDetailsDTO blockUser(Long userId, Long blockUserId) throws UserNotFoundException {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         User blockUser = userRepository.findById(blockUserId).orElseThrow(UserNotFoundException::new);
         user.getBlockedUsers().add(blockUser);
         userRepository.save(user);
+        return new UserDetailsConverter().convert(blockUser);
     }
 
     @Override
