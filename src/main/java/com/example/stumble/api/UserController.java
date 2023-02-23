@@ -33,7 +33,7 @@ public class UserController {
             @PathVariable Long id, @PathVariable Double lat, @PathVariable Double lon) {
         List<NearbyUserDTO> users = userService.findNearbyUsers(id, lat, lon).stream()
                 .map(nearbyUserConverter::convert).collect(Collectors.toList());
-        return new ResponseEntity<>(users, HttpStatus.CREATED);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping("/block")
