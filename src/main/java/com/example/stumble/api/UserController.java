@@ -1,5 +1,6 @@
 package com.example.stumble.api;
 
+import com.example.stumble.DTO.BlockUserBody;
 import com.example.stumble.DTO.NearbyUserDTO;
 import com.example.stumble.DTO.UserDetailsDTO;
 import com.example.stumble.converters.NearbyUserConverter;
@@ -37,8 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/block")
-    public ResponseEntity<UserDetailsDTO> blockUser(Long userId, Long blockUserId){
-        return new ResponseEntity<>(userService.blockUser(userId, blockUserId), HttpStatus.OK);
+    public ResponseEntity<UserDetailsDTO> blockUser(@RequestBody BlockUserBody body){
+        return new ResponseEntity<>(userService.blockUser(body.getUserId(), body.getBlockUserId()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
