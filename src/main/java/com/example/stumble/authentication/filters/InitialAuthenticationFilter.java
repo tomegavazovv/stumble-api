@@ -1,5 +1,6 @@
-package com.example.stumble.authentication;
+package com.example.stumble.authentication.filters;
 
+import com.example.stumble.authentication.UsernamePasswordAuth;
 import com.example.stumble.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -44,11 +45,13 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
                 .setClaims(Map.of("username", username, "id", id ))
                 .signWith(key)
                 .compact();
-            response.setHeader("Authorization", jwt);
+
+        response.setHeader("Authorization", jwt);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         return !request.getServletPath().equals("/login");
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.stumble.DTO;
+package com.example.stumble.dtos;
 
 import com.example.stumble.enums.Gender;
 import lombok.Data;
@@ -13,5 +13,5 @@ public class UserDetailsDTO {
     private String instagramAccount;
     private String facebookAccount;
     private String linkedinAccount;
-    private String image;
+    private String imagePath;
 }

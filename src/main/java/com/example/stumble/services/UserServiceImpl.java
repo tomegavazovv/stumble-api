@@ -1,27 +1,23 @@
 package com.example.stumble.services;
 
-import com.example.stumble.DTO.UserDetailsDTO;
+import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.converters.UserDetailsConverter;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 import com.example.stumble.repositories.UserRepository;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.stumble.services.interfaces.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override

@@ -1,5 +1,6 @@
-package com.example.stumble.authentication;
+package com.example.stumble.authentication.userDetailsService;
 
+import com.example.stumble.authentication.userDetails.CustomUserDetails;
 import com.example.stumble.entities.User;
 import com.example.stumble.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,14 +1,13 @@
 package com.example.stumble.configs;
 
-import com.example.stumble.authentication.InitialAuthenticationFilter;
-import com.example.stumble.authentication.JwtAuthenticationFilter;
-import com.example.stumble.authentication.UsernamePasswordAuthProvider;
+import com.example.stumble.authentication.filters.InitialAuthenticationFilter;
+import com.example.stumble.authentication.filters.JwtAuthenticationFilter;
+import com.example.stumble.authentication.authenticationProvider.UsernamePasswordAuthProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http.addFilterAt(
                         initialAuthenticationFilter,
                         BasicAuthenticationFilter.class)
@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         BasicAuthenticationFilter.class
                 );
         http.authorizeRequests()
+                .mvcMatchers("/register").permitAll()
                 .anyRequest().authenticated();
     }
 

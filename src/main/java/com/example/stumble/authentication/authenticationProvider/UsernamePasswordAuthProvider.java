@@ -1,5 +1,8 @@
-package com.example.stumble.authentication;
+package com.example.stumble.authentication.authenticationProvider;
 
+import com.example.stumble.authentication.userDetails.CustomUserDetails;
+import com.example.stumble.authentication.userDetailsService.JpaUserDetailsService;
+import com.example.stumble.authentication.UsernamePasswordAuth;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

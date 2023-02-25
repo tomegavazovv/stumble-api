@@ -1,6 +1,6 @@
 package com.example.stumble.converters;
 
-import com.example.stumble.DTO.UserDetailsDTO;
+import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.entities.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class UserDetailsConverter implements Converter<User, UserDetailsDTO> {
         dto.setFacebookAccount(user.getFacebookAccount());
         dto.setInstagramAccount(user.getInstagramAccount());
         dto.setLinkedinAccount(user.getLinkedinAccount());
-        dto.setImage(user.getImage());
+        dto.setImagePath(user.getImagePath());
         return dto;
     }
 }

@@ -1,5 +1,6 @@
-package com.example.stumble.authentication;
+package com.example.stumble.authentication.filters;
 
+import com.example.stumble.authentication.UsernamePasswordAuth;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -55,6 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getServletPath().equals("/login");
+        return request.getServletPath().equals("/login") ||
+                request.getServletPath().equals("/register");
     }
 }

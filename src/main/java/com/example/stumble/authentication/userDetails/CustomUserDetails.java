@@ -1,4 +1,4 @@
-package com.example.stumble.authentication;
+package com.example.stumble.authentication.userDetails;
 
 import com.example.stumble.entities.User;
 import org.springframework.security.core.GrantedAuthority;

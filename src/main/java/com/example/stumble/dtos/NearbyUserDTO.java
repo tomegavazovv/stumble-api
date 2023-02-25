@@ -1,4 +1,4 @@
-package com.example.stumble.DTO;
+package com.example.stumble.dtos;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ public class NearbyUserDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private String image;
+    private String imagePath;
     private Double lat;
     private Double lon;
 }

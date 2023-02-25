@@ -1,6 +1,6 @@
-package com.example.stumble.services;
+package com.example.stumble.services.interfaces;
 
-import com.example.stumble.DTO.UserDetailsDTO;
+import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 

@@ -1,6 +1,6 @@
 package com.example.stumble.converters;
 
-import com.example.stumble.DTO.NearbyUserDTO;
+import com.example.stumble.dtos.NearbyUserDTO;
 import com.example.stumble.entities.User;
 import org.springframework.stereotype.Component;
 import org.springframework.core.convert.converter.Converter;
@@ -16,7 +16,7 @@ public class NearbyUserConverter implements Converter<User, NearbyUserDTO> {
         userDTO.setLastName(user.getLastName());
         userDTO.setLat(user.getLat());
         userDTO.setLon(user.getLon());
-        userDTO.setImage(user.getImage());
+        userDTO.setImagePath(user.getImagePath());
         return userDTO;
     }
 
