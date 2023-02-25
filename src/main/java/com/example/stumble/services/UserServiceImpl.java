@@ -5,16 +5,23 @@ import com.example.stumble.converters.UserDetailsConverter;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 import com.example.stumble.repositories.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -32,9 +39,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findUserDetails(Long id) {
-        return userRepository.findById(id)
+    public User findUserDetails(String email) {
+        return userRepository.findUserByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    @Override
+    public Long findUserIdByEmail(String email) {
+        return userRepository.findUserIdByEmail(email);
+    }
+
 
 }

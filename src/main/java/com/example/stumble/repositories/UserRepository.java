@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -18,4 +19,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "ORDER BY Distance",
             nativeQuery = true)
     List<User> findNearbyUsers(@Param("id") long id, @Param("Lat") double lat, @Param("Lon") double Lon);
+
+    @Query(value = "SELECT id FROM users WHERE email = :Email", nativeQuery = true)
+    Long findUserIdByEmail(@Param("Email") String email);
+
+    Optional<User> findUserByEmail(String email);
+
+
 }

@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class BlockUserBody {
-    private Long userId;
-    private Long blockUserId;
+    private String blockUserEmail;
 }

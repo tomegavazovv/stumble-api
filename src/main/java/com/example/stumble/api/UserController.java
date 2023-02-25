@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,31 +24,34 @@ public class UserController {
     private final UserDetailsConverter userDetailsConverter;
     private final UserService userService;
 
-    public UserController(UserService userService, NearbyUserConverter nearbyUserConverter, UserDetailsConverter userDetailsConverter){
+    public UserController(UserService userService, NearbyUserConverter nearbyUserConverter, UserDetailsConverter userDetailsConverter) {
         this.userService = userService;
         this.nearbyUserConverter = nearbyUserConverter;
         this.userDetailsConverter = userDetailsConverter;
     }
 
-    @GetMapping("/nearby/{id}/{lat}/{lon}")
-    public ResponseEntity<List<NearbyUserDTO>> findNearbyUsers(
-            @PathVariable Long id, @PathVariable Double lat, @PathVariable Double lon) {
+    @GetMapping("/nearby/{lat}/{lon}")
+    public ResponseEntity<List<NearbyUserDTO>> findNearbyUsers(@PathVariable Double lat, @PathVariable Double lon, Principal principal) {
+
+        Long id = userService.findUserIdByEmail(principal.getName());
         List<NearbyUserDTO> users = userService.findNearbyUsers(id, lat, lon).stream()
                 .map(nearbyUserConverter::convert).collect(Collectors.toList());
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping("/block")
-    public ResponseEntity<UserDetailsDTO> blockUser(@RequestBody BlockUserBody body){
-        return new ResponseEntity<>(userService.blockUser(body.getUserId(), body.getBlockUserId()), HttpStatus.OK);
+    public ResponseEntity<UserDetailsDTO> blockUser(@RequestBody BlockUserBody body, Principal principal) {
+        Long id = userService.findUserIdByEmail(principal.getName());
+        Long blockUserId = userService.findUserIdByEmail(body.getBlockUserEmail());
+        return new ResponseEntity<>(userService.blockUser(id, blockUserId), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDetailsDTO> findDetails(@PathVariable Long id){
-        try{
-            User user = userService.findUserDetails(id);
+    @GetMapping("/{email}")
+    public ResponseEntity<UserDetailsDTO> findDetails(@PathVariable String email) {
+        try {
+            User user = userService.findUserDetails(email);
             return new ResponseEntity<>(userDetailsConverter.convert(user), HttpStatus.OK);
-        }catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

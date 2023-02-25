@@ -1,9 +1,9 @@
 package com.example.stumble.entities;
 
 import com.example.stumble.enums.Gender;
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -26,10 +26,8 @@ public class User {
     @NotNull
     private String image;
 
-    @NotNull
     private Double lat;
 
-    @NotNull
     private Double lon;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +35,11 @@ public class User {
     private Gender gender;
 
     @Email
+    @NotNull
     private String email;
+
+    @NotNull
+    private String password;
 
     private String description;
 
