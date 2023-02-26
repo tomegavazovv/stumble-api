@@ -50,11 +50,11 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
                 .signWith(key)
                 .compact();
 
+        response.setHeader("Authorization", jwt);
         new MappingJackson2HttpMessageConverter()
                 .write(new UserDetailsConverter().convert(userRepository.findUserByEmail(username).get()),
                         MediaType.APPLICATION_JSON,
                         new ServletServerHttpResponse(response));
-        response.setHeader("Authorization", jwt);
     }
 
     @Override
