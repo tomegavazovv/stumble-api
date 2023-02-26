@@ -17,6 +17,7 @@ public class NearbyUserConverter implements Converter<User, NearbyUserDTO> {
         userDTO.setLat(user.getLat());
         userDTO.setLon(user.getLon());
         userDTO.setImagePath(user.getImagePath());
+        userDTO.setEmail(user.getEmail());
         return userDTO;
     }
 

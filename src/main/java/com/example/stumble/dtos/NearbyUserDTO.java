@@ -10,4 +10,5 @@ public class NearbyUserDTO {
     private String imagePath;
     private Double lat;
     private Double lon;
+    private String email;
 }
