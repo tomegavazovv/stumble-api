@@ -2,7 +2,6 @@ package com.example.stumble.authentication.filters;
 
 import com.example.stumble.authentication.UsernamePasswordAuth;
 import com.example.stumble.repositories.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class InitialAuthenticationFilter extends OncePerRequestFilter {
@@ -34,8 +34,9 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String username = request.getHeader("email");
-        String password = request.getHeader("password");
+        var body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        String username = body.split("\"")[3];
+        String password = body.split("\"")[7];
         Long id = userRepository.findUserIdByEmail(username);
         Authentication a = new UsernamePasswordAuth(username, password);
         manager.authenticate(a);
