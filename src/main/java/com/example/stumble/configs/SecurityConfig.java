@@ -3,6 +3,8 @@ package com.example.stumble.configs;
 import com.example.stumble.authentication.filters.InitialAuthenticationFilter;
 import com.example.stumble.authentication.filters.JwtAuthenticationFilter;
 import com.example.stumble.authentication.authenticationProvider.UsernamePasswordAuthProvider;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,11 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UsernamePasswordAuthProvider usernamePasswordAuthProvider;
-
-    @Bean
-    public ObjectMapper objectMapper(){
-        return new Jackson2ObjectMapperBuilder().build();
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

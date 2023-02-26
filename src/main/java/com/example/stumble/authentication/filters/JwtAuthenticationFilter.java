@@ -43,14 +43,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-
         String username = String.valueOf(claims.get("username"));
         String id = String.valueOf(claims.get("id"));
         GrantedAuthority a = new SimpleGrantedAuthority("user");
         var auth = new UsernamePasswordAuth(username, null, List.of(a));
         auth.setDetails(id);
         SecurityContextHolder.getContext().setAuthentication(auth);
-
         filterChain.doFilter(request, response);
     }
 

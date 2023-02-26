@@ -1,11 +1,15 @@
 package com.example.stumble.authentication.filters;
 
 import com.example.stumble.authentication.UsernamePasswordAuth;
+import com.example.stumble.converters.UserDetailsConverter;
 import com.example.stumble.repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -37,22 +41,24 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
         var body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         String username = body.split("\"")[3];
         String password = body.split("\"")[7];
-        Long id = userRepository.findUserIdByEmail(username);
         Authentication a = new UsernamePasswordAuth(username, password);
         manager.authenticate(a);
 
         SecretKey key = Keys.hmacShaKeyFor(signingKey.getBytes(StandardCharsets.UTF_8));
         String jwt = Jwts.builder()
-                .setClaims(Map.of("username", username, "id", id ))
+                .setClaims(Map.of("username", username))
                 .signWith(key)
                 .compact();
 
+        new MappingJackson2HttpMessageConverter()
+                .write(new UserDetailsConverter().convert(userRepository.findUserByEmail(username).get()),
+                        MediaType.APPLICATION_JSON,
+                        new ServletServerHttpResponse(response));
         response.setHeader("Authorization", jwt);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         return !request.getServletPath().equals("/login");
-
     }
 }
