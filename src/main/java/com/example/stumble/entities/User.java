@@ -56,6 +56,12 @@ public class User {
             inverseJoinColumns={@JoinColumn(name="blocked_user_id")})
     private Set<User> blockedUsers = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="user_messages",
+            joinColumns={@JoinColumn(name="sender_id")},
+            inverseJoinColumns={@JoinColumn(name="receiver_id")})
+    private Set<User> userMessages = new HashSet<>();
+
     public User(Builder builder){
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
