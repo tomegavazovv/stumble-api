@@ -1,7 +1,7 @@
 package com.example.stumble.services;
 
-import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.converters.UserDetailsConverter;
+import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
 import com.example.stumble.repositories.UserRepository;
@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -36,13 +37,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserDetails(String email) {
-        return userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
+        return userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
     public Long findUserIdByEmail(String email) {
         return userRepository.findUserIdByEmail(email);
+    }
+
+    @Override
+    public void addMessage(String sender, String receiver) {
+        userRepository.findUserByEmail(sender).get().getUserMessages().add(userRepository.findUserByEmail(receiver).get());
+    }
+
+    @Override
+    public List<UserDetailsDTO> getMessages(String email) {
+        return userRepository.findUserByEmail(email).get().getUserMessages().stream().map(u -> new UserDetailsConverter().convert(u)).collect(Collectors.toList());
     }
 
 

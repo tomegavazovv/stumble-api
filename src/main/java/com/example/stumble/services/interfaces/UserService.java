@@ -11,5 +11,8 @@ public interface UserService {
     UserDetailsDTO blockUser(Long userId, Long blockUserId) throws UserNotFoundException;
     User findUserDetails(String email) throws UserNotFoundException;
     Long findUserIdByEmail(String email);
+    void addMessage(String sender, String receiver);
+
+    List<UserDetailsDTO> getMessages(String email);
 
 }

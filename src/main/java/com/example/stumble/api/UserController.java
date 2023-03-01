@@ -1,5 +1,6 @@
 package com.example.stumble.api;
 
+import com.example.stumble.dtos.AddMessageBody;
 import com.example.stumble.dtos.BlockUserBody;
 import com.example.stumble.dtos.NearbyUserDTO;
 import com.example.stumble.dtos.UserDetailsDTO;
@@ -67,6 +68,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image failed to upload");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body("/images/"+file.getOriginalFilename());
+    }
+
+    @GetMapping("/messages")
+    public List<UserDetailsDTO> getMessages(Principal principal){
+        return userService.getMessages(principal.getName());
+    }
+
+    @PostMapping("/messages")
+    public ResponseEntity<?> addMessage(@RequestBody AddMessageBody body, Principal principal){
+        userService.addMessage(principal.getName(), body.getReceiver());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
 

@@ -50,7 +50,6 @@ public class AuthController {
                 .lat(10.0)
                 .lon(10.0)
                 .build();
-
         try {
             StorageUtils.uploadImage(image, user.getEmail());
             user.setImagePath(StorageUtils.getPath(image, user.getEmail()));
