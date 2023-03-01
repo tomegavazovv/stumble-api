@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 );
         http.authorizeRequests()
                 .mvcMatchers("/register").permitAll()
+                .mvcMatchers("/images/**").permitAll()
                 .anyRequest().authenticated();
     }
 
