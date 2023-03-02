@@ -47,7 +47,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addMessage(String sender, String receiver) {
-        userRepository.findUserByEmail(sender).get().getUserMessages().add(userRepository.findUserByEmail(receiver).get());
+        User senderUser = userRepository.findUserByEmail(sender).orElseThrow(() -> new RuntimeException("Sender not found"));
+        User receiverUser = userRepository.findUserByEmail(receiver).orElseThrow(() -> new RuntimeException("Receiver not found"));
+
+        if (!senderUser.getUserMessages().contains(receiverUser)) {
+            senderUser.getUserMessages().add(receiverUser);
+            userRepository.save(senderUser);
+        }
     }
 
     @Override
