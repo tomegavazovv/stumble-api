@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByEmail(String email);
 
-    @Query(value = "SELECT u.* FROM user_messages um " +
+    @Query(value = "SELECT DISTINCT u.* FROM user_messages um " +
             "INNER JOIN users u ON u.id = um.sender_id OR u.id = um.receiver_id " +
             "WHERE um.sender_id = :id OR um.receiver_id = :id", nativeQuery = true)
     List<User> findConversations(@Param("id") long id);
