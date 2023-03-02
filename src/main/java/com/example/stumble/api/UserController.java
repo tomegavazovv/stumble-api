@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @GetMapping("/messages")
-    public List<UserDetailsDTO> getMessages(Principal principal){
+    public List<NearbyUserDTO> getMessages(Principal principal){
         return userService.getMessages(principal.getName());
     }
 

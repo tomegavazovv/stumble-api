@@ -1,5 +1,6 @@
 package com.example.stumble.services.interfaces;
 
+import com.example.stumble.dtos.NearbyUserDTO;
 import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
@@ -13,6 +14,6 @@ public interface UserService {
     Long findUserIdByEmail(String email);
     void addMessage(String sender, String receiver);
 
-    List<UserDetailsDTO> getMessages(String email);
+    List<NearbyUserDTO> getMessages(String email);
 
 }

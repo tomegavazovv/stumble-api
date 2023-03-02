@@ -1,6 +1,8 @@
 package com.example.stumble.services;
 
+import com.example.stumble.converters.NearbyUserConverter;
 import com.example.stumble.converters.UserDetailsConverter;
+import com.example.stumble.dtos.NearbyUserDTO;
 import com.example.stumble.dtos.UserDetailsDTO;
 import com.example.stumble.entities.User;
 import com.example.stumble.exceptions.UserNotFoundException;
@@ -57,8 +59,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDetailsDTO> getMessages(String email) {
-        return userRepository.findUserByEmail(email).get().getUserMessages().stream().map(u -> new UserDetailsConverter().convert(u)).collect(Collectors.toList());
+    public List<NearbyUserDTO> getMessages(String email) {
+        return userRepository.findUserByEmail(email).get().getUserMessages().stream().map(u -> new NearbyUserConverter().convert(u)).collect(Collectors.toList());
     }
 
 
