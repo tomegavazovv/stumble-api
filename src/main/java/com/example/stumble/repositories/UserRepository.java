@@ -31,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "INNER JOIN users u ON u.id = um.sender_id OR u.id = um.receiver_id " +
             "LEFT JOIN blocked_users bu ON (u.id = bu.user_id AND bu.blocked_user_id = :id) OR (u.id = bu.blocked_user_id AND bu.user_id = :id)" +
             "WHERE (um.sender_id = :id OR um.receiver_id = :id)" +
-            "AND bu.user_id IS NULL;", nativeQuery = true)
+            "AND bu.user_id IS NULL", nativeQuery = true)
     List<User> findConversations(@Param("id") long id);
 
 
