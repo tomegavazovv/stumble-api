@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -25,9 +26,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByEmail(String email);
 
-    @Query(value = "SELECT * from user_messages" +
-            "WHERE sender_id = :id or receiver_id = :id", nativeQuery = true)
+    @Query(value = "SELECT u.* FROM user_messages um " +
+            "INNER JOIN users u ON u.id = um.sender_id OR u.id = um.receiver_id " +
+            "WHERE um.sender_id = :id OR um.receiver_id = :id", nativeQuery = true)
     List<User> findConversations(@Param("id") long id);
+
 
 
 }
