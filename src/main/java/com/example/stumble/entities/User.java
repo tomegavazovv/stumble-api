@@ -24,6 +24,7 @@ public class User {
     @NotNull
     private String lastName;
 
+    @NotNull
     private String imagePath;
 
     private Double lat;

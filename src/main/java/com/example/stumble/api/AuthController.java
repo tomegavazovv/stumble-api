@@ -28,7 +28,7 @@ public class AuthController {
     public ResponseEntity<?> registerUser(
             @RequestParam String firstName,
             @RequestParam String lastName,
-            @RequestParam MultipartFile image,
+            @RequestParam MultipartFile imagePath,
             @RequestParam Gender gender,
             @RequestParam String email,
             @RequestParam String password,
@@ -51,8 +51,8 @@ public class AuthController {
                 .lon(10.0)
                 .build();
         try {
-            StorageUtils.uploadImage(image, user.getEmail());
-            user.setImagePath(StorageUtils.getPath(image, user.getEmail()));
+            StorageUtils.uploadImage(imagePath, user.getEmail());
+            user.setImagePath(StorageUtils.getPath(imagePath, user.getEmail()));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image could not be uploaded.");
         }
