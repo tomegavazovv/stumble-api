@@ -16,9 +16,4 @@ public class ProjectConfig implements WebMvcConfigurer {
         converters.add(new MappingJackson2HttpMessageConverter());
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/static/images/");
-    }
 }
