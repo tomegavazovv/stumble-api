@@ -25,5 +25,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByEmail(String email);
 
+    @Query(value = "SELECT * from user_messages" +
+            "WHERE sender_id = :id or receiver_id = :id", nativeQuery = true)
+    List<User> findConversations(@Param("id") long id);
+
 
 }

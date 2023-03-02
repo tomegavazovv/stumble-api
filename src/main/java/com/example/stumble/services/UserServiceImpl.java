@@ -59,8 +59,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NearbyUserDTO> getMessages(String email) {
-        return userRepository.findUserByEmail(email).get().getUserMessages().stream().map(u -> new NearbyUserConverter().convert(u)).collect(Collectors.toList());
+    public List<NearbyUserDTO> getMessages(String email1) {
+        Long id = userRepository.findUserByEmail(email1).get().getId();
+        return userRepository.findConversations(id).stream()
+                .map(u -> new NearbyUserConverter().convert(u)).collect(Collectors.toList());
     }
 
 
